@@ -1,0 +1,25 @@
+﻿@page
+@model BlogCRUDWeb.Authors.AddModel
+@{
+    ViewData["Title"] = "Add author";
+}
+<h1 class="mb-3">Add new author</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Full name</label>
+        <input type="text" class="form-control" asp-for="AddAuthorRequest.FullName"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Bio</label>
+        <input type="text" class="form-control" asp-for="AddAuthorRequest.AboutMe"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date of birth</label>
+        <input type="date" class="form-control" asp-for="AddAuthorRequest.DateOfBirth"/>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>

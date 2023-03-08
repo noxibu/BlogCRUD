@@ -1,0 +1,53 @@
+﻿@page
+@model BlogCRUDWeb.Pages.Authors.AllModel
+@{
+    ViewData["Title"] = "All authors";
+    var fullName = Model.FullName;
+    var updateSuccessful = Model.UpdateSuccessful;
+}
+
+<h1>
+    List of featured authors
+</h1>
+
+ @if (!string.IsNullOrWhiteSpace(fullName) && updateSuccessful == false)
+    {
+        <div class="alert alert-success" role="alert">
+            Author <b>@fullName</b> is now featured
+    </div>
+} else if (updateSuccessful)
+{
+    <div class="alert alert-success" role="alert">
+        Author <b>@fullName</b> is updated
+    </div>
+}
+
+@if (Model.Authors != null && Model.Authors.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Full name</th>
+                <th>Bio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Authors)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.AboutMe</td>
+                    <td>
+                        <a href="/Authors/Edit/@item.Id" class="btn btn-dark">Edit</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Currently there aren't any authors</p>
+}
