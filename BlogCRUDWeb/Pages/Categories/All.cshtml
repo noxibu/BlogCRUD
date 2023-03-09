@@ -1,0 +1,33 @@
+﻿@page
+@model BlogCRUDWeb.Pages.Categories.AllModel
+@{
+}
+<h1>
+    All categories
+</h1>
+
+@if(Model.Categories != null && Model.Categories.Any())
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <a href="/Categories/Edit/@item.Id">Edit @item.Id</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+

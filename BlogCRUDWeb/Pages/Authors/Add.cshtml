@@ -2,7 +2,16 @@
 @model BlogCRUDWeb.Authors.AddModel
 @{
     ViewData["Title"] = "Add author";
+    string message = ViewData["Message"]?.ToString();
 }
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+            <div class="alert alert-danger" role="alert">
+                @message
+            </div>
+}
+
 <h1 class="mb-3">Add new author</h1>
 
 <form method="post">

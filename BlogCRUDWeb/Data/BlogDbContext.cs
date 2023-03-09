@@ -21,9 +21,14 @@ namespace BlogCRUDWeb.Data
                 .WithMany(y => y.BlogPosts)
                 .HasForeignKey(z => z.AuthorId);
 
-            modelBuilder.Entity<BlogPost>()
-                .HasOne(x => x.Category)
-                .WithMany(y => y.BlogPosts)
+            //modelBuilder.Entity<BlogPost>()
+            //    .HasOne(x => x.Category)
+            //    .WithMany(y => y.BlogPosts)
+            //    .HasForeignKey(z => z.CategoryId);
+
+            modelBuilder.Entity<Category>()
+                .HasMany(x => x.BlogPosts)
+                .WithOne(y => y.Category)
                 .HasForeignKey(z => z.CategoryId);
 
         }

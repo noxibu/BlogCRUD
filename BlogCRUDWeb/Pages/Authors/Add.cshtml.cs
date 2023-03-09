@@ -35,7 +35,6 @@ namespace BlogCRUDWeb.Authors
 
                 dbContext.Add(authorDomainModel);
                 dbContext.SaveChanges();
-                ViewData["Author"] = authorDomainModel.FullName;
                 return RedirectToPage("/Authors/All", new { FullName = authorDomainModel.FullName });
             }
             return Page();
