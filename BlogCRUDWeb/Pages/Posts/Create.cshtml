@@ -1,0 +1,46 @@
+﻿@page
+@model BlogCRUDWeb.Posts.CreateModel
+@{
+}
+
+<h1>
+    Create a new post
+</h1>
+
+@if(Model.Authors != null && Model.Authors.Any())
+{
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Body</label>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="mb-3">
+            @if(Model.Authors.Count == 1)
+            {
+                <input type="text" class="form-control" value="@Model.Authors.First().FullName" readonly/>
+            } else
+            {
+                <select class="form-select">
+                    <option value="">Select author</option>
+                    @foreach (var item in Model.Authors)
+                    {
+                        <option value="@item.Id">@item.FullName</option>
+                    }
+                </select>
+            }
+            
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+} else
+{
+    <h2>Cannot create a post since no authors are created.</h2>
+    <a asp-page="/Authors/Add"><b>Create one now.</b></a>
+}

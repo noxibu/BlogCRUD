@@ -57,9 +57,8 @@ namespace BlogCRUDWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
@@ -72,7 +71,24 @@ namespace BlogCRUDWeb.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("BlogPosts");
+                });
+
+            modelBuilder.Entity("BlogCRUDWeb.Models.Domain.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BlogCRUDWeb.Models.Domain.BlogPost", b =>
@@ -83,10 +99,23 @@ namespace BlogCRUDWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BlogCRUDWeb.Models.Domain.Category", "Category")
+                        .WithMany("BlogPosts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BlogCRUDWeb.Models.Domain.Author", b =>
+                {
+                    b.Navigation("BlogPosts");
+                });
+
+            modelBuilder.Entity("BlogCRUDWeb.Models.Domain.Category", b =>
                 {
                     b.Navigation("BlogPosts");
                 });

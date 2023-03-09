@@ -1,16 +1,13 @@
-﻿using System.Diagnostics;
+﻿using BlogCRUDWeb.Models.Domain;
 
-namespace BlogCRUDWeb.Models.Domain
+namespace BlogCRUDWeb.Models.ViewModels
 {
-    public class BlogPost
+    public class AddPostViewModel
     {
-        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
         public Guid AuthorId { get; set; }
-        public Author Author { get; set; }
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
         public DateTime DatePosted { get; set; }
     }
 }
