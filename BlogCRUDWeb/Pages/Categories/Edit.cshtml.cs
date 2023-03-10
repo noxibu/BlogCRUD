@@ -1,4 +1,5 @@
 using BlogCRUDWeb.Data;
+using BlogCRUDWeb.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,10 +13,23 @@ namespace BlogCRUDWeb.Pages.Categories
         {
             this.dbContext = dbContext;
         }
+        [BindProperty]
+        public EditCategoryViewModel EditCategoryRequest { get; set; }
 
         public void OnGet(Guid id)
         {
-            var catgeory = dbContext.Categories.Find(id);
+            var category = dbContext.Categories.Find(id);
+
+            if(category!= null)
+            {
+                EditCategoryRequest = new EditCategoryViewModel
+                {
+                    Id = category.Id,
+                    Name = category.Name
+                };
+
+                Console.WriteLine(EditCategoryRequest.Name);
+            }
         }
     }
 }

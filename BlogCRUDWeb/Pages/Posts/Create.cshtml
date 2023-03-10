@@ -7,28 +7,44 @@
     Create a new post
 </h1>
 
-@if(Model.Authors != null && Model.Authors.Any())
+@if(Model.Authors != null && Model.Authors.Any() && Model.Categories != null && Model.Authors.Any())
 {
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" asp-for="AddPostRequest.Title"/>
         </div>
         <div class="mb-3">
             <label class="form-label">Body</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" asp-for="AddPostRequest.Body"/>
         </div>
         <div class="mb-3">
             @if(Model.Authors.Count == 1)
             {
+                <input type="hidden" class="form-control" value="@Model.Authors.First().Id" asp-for="AddPostRequest.AuthorId" readonly />
                 <input type="text" class="form-control" value="@Model.Authors.First().FullName" readonly/>
             } else
             {
-                <select class="form-select">
+                <select class="form-select" asp-for="AddPostRequest.AuthorId">
                     <option value="">Select author</option>
                     @foreach (var item in Model.Authors)
                     {
                         <option value="@item.Id">@item.FullName</option>
+                    }
+                </select>
+            }
+
+            @if(Model.Categories.Count == 1)
+            {
+                <input type="hidden" class="form-control" value="@Model.Categories.First().Id" asp-for="AddPostRequest.CategoryId" readonly />
+                <input type="text" class="form-control" value="@Model.Categories.First().Name" readonly/>
+            } else
+            {
+                <select class="form-select" asp-for="AddPostRequest.CategoryId">
+                    <option value="">Select category</option>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.Id">@item.Name</option>
                     }
                 </select>
             }
